@@ -1,7 +1,6 @@
-"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { signInWithDiscord, signOut, useSession } from "@/lib/auth-client";
+import UserZone from "./userzone";
 
 function Header() {
 	return (
@@ -16,31 +15,5 @@ function Header() {
 		</header>
 	);
 }
-
-const UserZone = () => {
-	const { data: session, isPending } = useSession();
-
-	if (isPending) {
-		return (
-			<Button variant="outline" disabled>
-				Login
-			</Button>
-		);
-	}
-
-	if (!session?.user.id) {
-		return (
-			<Button variant="outline" onClick={async () => await signInWithDiscord()}>
-				Login
-			</Button>
-		);
-	}
-
-	return (
-		<Button variant="outline" onClick={() => signOut()}>
-			Logout
-		</Button>
-	);
-};
 
 export default Header;
