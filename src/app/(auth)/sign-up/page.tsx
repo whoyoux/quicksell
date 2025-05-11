@@ -1,3 +1,4 @@
+import SignedInAlert from "@/components/signed-in-alert";
 import SignUpForm from "./form";
 import Link from "next/link";
 
@@ -5,6 +6,7 @@ function SignUpPage() {
 	return (
 		<div>
 			<div className="flex flex-col gap-4 max-w-md mx-auto md:pt-8">
+				<SignedInAlert />
 				<h2 className="text-2xl font-bold">Create an account</h2>
 				<SignUpForm />
 				<Link
