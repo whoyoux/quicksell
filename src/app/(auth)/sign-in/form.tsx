@@ -68,6 +68,12 @@ function SignInForm({ className }: { className?: string }) {
 							message:
 								"Invalid email or password. Please check your credentials and try again.",
 						});
+					} else if (ctx.error.status === 403) {
+						form.setError("root", {
+							type: "manual",
+							message:
+								"Please verify your email to sign in. Check your email for a verification link.",
+						});
 					} else {
 						toast.error("Failed to sign in. Please try again later.");
 					}

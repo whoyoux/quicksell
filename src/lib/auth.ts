@@ -3,6 +3,7 @@ import { nextCookies } from "better-auth/next-js";
 
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
+import { sendEmail } from "./resend";
 
 export const auth = betterAuth({
 	database: prismaAdapter(prisma, {
@@ -10,6 +11,7 @@ export const auth = betterAuth({
 	}),
 	emailAndPassword: {
 		enabled: true,
+		requireEmailVerification: true,
 	},
 	socialProviders: {
 		discord: {
@@ -18,14 +20,17 @@ export const auth = betterAuth({
 		},
 	},
 	emailVerification: {
-		// sendOnSignUp: true,
+		autoSignInAfterVerification: true,
+		sendOnSignUp: true,
 		sendVerificationEmail: async ({ user, url, token }, request) => {
-			// TODO: Sending email!!!!
-			// await sendEmail({
-			//     to: user.email,
-			//     subject: 'Verify your email address',
-			//     text: `Click the link to verify your email: ${url}`
-			// })
+			const result = await sendEmail(
+				user.email,
+				"Verify your email address",
+				`Click the link to verify your email: ${url}`,
+			);
+			if (!result.success) {
+				console.error("[SEND VERIFICATION EMAIL ERROR]: ", result.error);
+			}
 		},
 	},
 	plugins: [nextCookies()],

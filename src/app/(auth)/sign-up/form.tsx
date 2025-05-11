@@ -25,6 +25,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "@/components/password-input";
+
 function SignUpForm({ className }: { className?: string }) {
 	const router = useRouter();
 	const [isPending, setIsPending] = useState(false);
@@ -55,7 +56,9 @@ function SignUpForm({ className }: { className?: string }) {
 					setIsPending(false);
 				},
 				onSuccess: (ctx) => {
-					toast.success("Account created successfully");
+					toast.success(
+						"Account created successfully. Check your email for a verification link.",
+					);
 					router.push("/");
 				},
 				onError: (ctx) => {
