@@ -69,7 +69,9 @@ const DesktopUser = () => {
 				<DropdownMenuItem asChild>
 					<Link href="/my-profile">My profile</Link>
 				</DropdownMenuItem>
-				<DropdownMenuItem>Settings</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<Link href="/settings">Settings</Link>
+				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
 					onClick={async () =>

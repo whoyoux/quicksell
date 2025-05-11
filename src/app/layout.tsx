@@ -4,7 +4,9 @@ import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
 
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
+import { ThemeProvider } from "@/components/theme-provider";
 
 import Header from "@/components/header/header";
 
@@ -24,15 +26,26 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={`antialiased ${geistSans.variable}`}>
+		<html
+			lang="en"
+			className={`antialiased ${geistSans.variable}`}
+			suppressHydrationWarning
+		>
 			<body>
-			<NuqsAdapter>
-				<div className="max-w-screen-xl mx-auto px-4 xl:px-0">
-					<Header />
-					{children}
-				</div>
-				<Toaster />
-				</NuqsAdapter>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<NuqsAdapter>
+						<div className="max-w-screen-xl mx-auto px-4 xl:px-0">
+							<Header />
+							{children}
+						</div>
+						<Toaster />
+					</NuqsAdapter>
+				</ThemeProvider>
 			</body>
 		</html>
 	);
