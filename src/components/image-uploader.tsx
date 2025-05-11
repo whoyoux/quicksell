@@ -83,7 +83,7 @@ function SortableImage({
 			<button
 				type="button"
 				onClick={() => onRemove(index)}
-				className="absolute right-1 top-1 rounded-full bg-black/50 p-1 text-white hover:bg-black/70 cursor-pointer"
+				className="absolute right-1 top-1 rounded-full bg-destructive/90 p-1 text-white hover:bg-destructive/100 cursor-pointer"
 				aria-label="Remove image"
 			>
 				<svg

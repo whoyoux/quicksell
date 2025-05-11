@@ -45,7 +45,7 @@ function AddOfferForm({ className }: { className?: string }) {
 			setIsPending(true);
 			console.log("Form values:", values);
 			toast.success("Offer added successfully");
-			router.push("/");
+			// router.push("/");
 		} catch (error) {
 			console.error("Error submitting form:", error);
 			toast.error("An error occurred while adding the offer");
