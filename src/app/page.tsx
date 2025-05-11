@@ -11,7 +11,6 @@ export default function Home() {
 				<Card number={4} price={400} />
 				<Card number={5} price={500} />
 			</div>
-			<UserDebug />
 		</>
 	);
 }
@@ -23,7 +22,6 @@ type CardProps = {
 
 import placeholderImage from "@/assets/placeholder.webp";
 import Link from "next/link";
-import UserDebug from "@/components/user-debug";
 
 const Card = ({ number, price }: CardProps) => {
 	return (

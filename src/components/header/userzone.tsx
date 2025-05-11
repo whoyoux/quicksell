@@ -17,9 +17,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-
+import { useRouter } from "next/navigation";
 function UserZone() {
 	const { data: session, isPending } = useSession();
+	const router = useRouter();
 
 	// session pending
 	if (isPending) {
@@ -51,10 +52,22 @@ function UserZone() {
 			<DropdownMenuContent className="w-48">
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>Profile</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<Link href="/my-profile">My profile</Link>
+				</DropdownMenuItem>
 				<DropdownMenuItem>Settings</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={async () => await signOut()}>
+				<DropdownMenuItem
+					onClick={async () =>
+						await signOut({
+							fetchOptions: {
+								onSuccess: () => {
+									router.push("/");
+								},
+							},
+						})
+					}
+				>
 					Logout
 				</DropdownMenuItem>
 			</DropdownMenuContent>
