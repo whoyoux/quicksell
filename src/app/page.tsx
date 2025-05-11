@@ -3,13 +3,16 @@ import Image from "next/image";
 
 export default function Home() {
 	return (
-		<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-			<Card number={1} price={100} />
-			<Card number={2} price={200} />
-			<Card number={3} price={300} />
-			<Card number={4} price={400} />
-			<Card number={5} price={500} />
-		</div>
+		<>
+			<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+				<Card number={1} price={100} />
+				<Card number={2} price={200} />
+				<Card number={3} price={300} />
+				<Card number={4} price={400} />
+				<Card number={5} price={500} />
+			</div>
+			<UserDebug />
+		</>
 	);
 }
 
@@ -20,11 +23,11 @@ type CardProps = {
 
 import placeholderImage from "@/assets/placeholder.webp";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import UserDebug from "@/components/user-debug";
 
 const Card = ({ number, price }: CardProps) => {
 	return (
-		<div className="aspect-square bg-muted/70 rounded-md p-4 flex flex-col gap-2">
+		<div className="bg-muted/70 rounded-md p-4 flex flex-col gap-2">
 			<div className="aspect-video w-full bg-red-400 rounded-md relative">
 				<Image
 					src={placeholderImage}

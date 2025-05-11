@@ -1,9 +1,9 @@
 import { createAuthClient } from "better-auth/react";
 
-const { signIn: signInClient, signOut, useSession } = createAuthClient();
+const { signIn, signUp, signOut, useSession } = createAuthClient();
 
 const signInWithDiscord = async () => {
-	const { error } = await signInClient.social({
+	const { error } = await signIn.social({
 		provider: "discord",
 		callbackURL: "/",
 	});
@@ -13,4 +13,4 @@ const signInWithDiscord = async () => {
 	}
 };
 
-export { signInWithDiscord, signOut, useSession };
+export { signUp, signIn, signInWithDiscord, signOut, useSession };
