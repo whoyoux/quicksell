@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import UserZone from "./userzone";
 import SearchInput from "@/components/ui/search-input";
+import { Suspense } from "react";
+import DisabledSearchInput from "@/components/ui/disabled-search-input";
 
 function Header() {
 	return (
@@ -11,7 +13,9 @@ function Header() {
 			</Link>
 
 			<div className="flex items-center gap-2">
-				<SearchInput />
+				<Suspense fallback={<DisabledSearchInput />}>
+					<SearchInput />
+				</Suspense>
 				<Button className="hidden md:block">Sell now</Button>
 				<UserZone />
 			</div>

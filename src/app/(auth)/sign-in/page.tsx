@@ -13,7 +13,7 @@ function SignInPage() {
 					href="/sign-up"
 					className="text-sm text-muted-foreground hover:underline text-center"
 				>
-					Don't have an account? Sign up
+					Don&apos;t have an account? Sign up
 				</Link>
 			</div>
 		</div>

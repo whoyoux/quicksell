@@ -25,7 +25,6 @@ import { signIn } from "@/lib/auth-client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
 import { PasswordInput } from "@/components/password-input";
 
 function SignInForm({ className }: { className?: string }) {

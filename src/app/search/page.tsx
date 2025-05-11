@@ -1,12 +1,18 @@
+import { Suspense } from "react";
+import SearchTable from "./search-table";
+export const experimental_ppr = true;
+
 async function SearchPage({
 	searchParams,
 }: {
 	searchParams: Promise<{ q: string }>;
 }) {
-	const { q } = await searchParams;
 	return (
 		<div>
-			<h3 className="text-lg font-medium">Search results for {q}</h3>
+			<h2>Search page</h2>
+			<Suspense fallback={<div>Loading...</div>}>
+				<SearchTable searchParams={searchParams} />
+			</Suspense>
 		</div>
 	);
 }

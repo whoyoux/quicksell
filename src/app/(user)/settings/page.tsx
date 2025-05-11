@@ -128,7 +128,7 @@ function SettingsPage() {
 							<div className="space-y-0.5">
 								<Label>Activity Status</Label>
 								<p className="text-sm text-muted-foreground">
-									Show when you're active on the platform
+									Show when you&apos;re active on the platform
 								</p>
 							</div>
 							<Switch defaultChecked />
