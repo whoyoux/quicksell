@@ -2,8 +2,6 @@
 
 import { signOut } from "@/lib/auth-client";
 
-import { signInWithDiscord } from "@/lib/auth-client";
-
 import { useSession } from "@/lib/auth-client";
 import { Button, buttonVariants } from "@/components/ui/button";
 
@@ -18,9 +16,10 @@ import {
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { User } from "lucide-react";
+
 function UserZone() {
 	const { data: session, isPending } = useSession();
-	const router = useRouter();
 
 	// session pending
 	if (isPending) {
@@ -45,9 +44,22 @@ function UserZone() {
 
 	// session found
 	return (
+		<>
+			<DesktopUser />
+			{/* <MobileUser /> */}
+		</>
+	);
+}
+
+const DesktopUser = () => {
+	const router = useRouter();
+
+	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="outline">My account</Button>
+				<Button variant="outline" size="icon">
+					<User />
+				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-48">
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -73,6 +85,39 @@ function UserZone() {
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
-}
+};
+
+// import {
+// 	Sheet,
+// 	SheetContent,
+// 	SheetDescription,
+// 	SheetHeader,
+// 	SheetTitle,
+// 	SheetTrigger,
+// } from "@/components/ui/sheet";
+// import { useState } from "react";
+
+// const MobileUser = () => {
+// 	const [open, setOpen] = useState(false);
+
+// 	return (
+// 		<Sheet open={open} onOpenChange={setOpen}>
+// 			<SheetTrigger asChild>
+// 				<Button size="icon" variant="outline">
+// 					<User />
+// 				</Button>
+// 			</SheetTrigger>
+// 			<SheetContent>
+// 				<SheetHeader>
+// 					<SheetTitle>Are you absolutely sure?</SheetTitle>
+// 					<SheetDescription>
+// 						This action cannot be undone. This will permanently delete your
+// 						account and remove your data from our servers.
+// 					</SheetDescription>
+// 				</SheetHeader>
+// 			</SheetContent>
+// 		</Sheet>
+// 	);
+// };
 
 export default UserZone;

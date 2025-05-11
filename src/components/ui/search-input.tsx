@@ -29,7 +29,7 @@ function SearchInput() {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex w-full max-w-md items-center space-x-2"
+			className="flex w-full items-center space-x-2"
 		>
 			<div className="relative flex-1">
 				<Input
