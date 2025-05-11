@@ -89,9 +89,7 @@ function SignInForm({ className }: { className?: string }) {
 								<FormControl>
 									<Input placeholder="example@email.com" {...field} />
 								</FormControl>
-								<FormDescription>
-									Enter your email to create an account.
-								</FormDescription>
+								<FormDescription>Enter your email to sign in.</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -106,7 +104,7 @@ function SignInForm({ className }: { className?: string }) {
 									<PasswordInput {...field} />
 								</FormControl>
 								<FormDescription>
-									Enter your password to create an account.
+									Enter your password to sign in.
 								</FormDescription>
 								<FormMessage />
 							</FormItem>
