@@ -4,6 +4,8 @@ import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
 
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+
 import Header from "@/components/header/header";
 
 const geistSans = Geist({
@@ -24,11 +26,13 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={`antialiased ${geistSans.variable}`}>
 			<body>
+			<NuqsAdapter>
 				<div className="max-w-screen-xl mx-auto px-4 xl:px-0">
 					<Header />
 					{children}
 				</div>
 				<Toaster />
+				</NuqsAdapter>
 			</body>
 		</html>
 	);

@@ -26,7 +26,7 @@ import Link from "next/link";
 const Card = ({ number, price }: CardProps) => {
 	return (
 		<div className="bg-muted/70 rounded-md p-4 flex flex-col gap-2">
-			<div className="aspect-video w-full bg-red-400 rounded-md relative">
+			<div className="aspect-video w-full rounded-md relative">
 				<Image
 					src={placeholderImage}
 					alt="placeholder"
