@@ -1,48 +1,62 @@
 import { formatPrice } from "@/lib/utils";
 import Image from "next/image";
 
+import placeholderImage from "@/assets/placeholder.webp";
+import Link from "next/link";
+
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+
 export default function Home() {
 	return (
 		<>
 			<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-				<Card number={1} price={100} />
-				<Card number={2} price={200} />
-				<Card number={3} price={300} />
-				<Card number={4} price={400} />
-				<Card number={5} price={500} />
+				<MyCard number={1} price={100} />
+				<MyCard number={2} price={200} />
+				<MyCard number={3} price={300} />
+				<MyCard number={4} price={400} />
+				<MyCard number={5} price={500} />
 			</div>
 		</>
 	);
 }
 
-type CardProps = {
+type MyCardProps = {
 	number: number;
 	price: number;
 };
 
-import placeholderImage from "@/assets/placeholder.webp";
-import Link from "next/link";
-
-const Card = ({ number, price }: CardProps) => {
+const MyCard = ({ number, price }: MyCardProps) => {
 	return (
-		<div className="bg-muted/70 rounded-md p-4 flex flex-col gap-2">
-			<div className="aspect-video w-full rounded-md relative">
-				<Image
-					src={placeholderImage}
-					alt="placeholder"
-					fill
-					className="rounded-md object-cover"
-					quality={70}
-					sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-					placeholder="blur"
-				/>
-			</div>
-			<div>
+		<Card>
+			<CardContent>
+				<div className="aspect-video w-full rounded-md relative">
+					<Image
+						src={placeholderImage}
+						alt="placeholder"
+						fill
+						className="rounded-md object-cover"
+						quality={70}
+						sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+						placeholder="blur"
+					/>
+				</div>
+			</CardContent>
+			<CardHeader>
 				<Link href="#">
-					<h2 className="font-medium hover:underline">offer name {number}</h2>
+					<CardTitle className="hover:underline">offer name {number}</CardTitle>
 				</Link>
-				<h3 className="text-sm text-muted-foreground">{formatPrice(price)}</h3>
-			</div>
-		</div>
+				<CardDescription>{formatPrice(price)}</CardDescription>
+			</CardHeader>
+			{/* <CardFooter>
+				<p className="text-sm text-muted-foreground">998 views</p>
+			</CardFooter> */}
+		</Card>
 	);
 };
