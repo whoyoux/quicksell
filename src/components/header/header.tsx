@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import UserZone from "./userzone";
 import SearchInput from "@/components/ui/search-input";
 import { Suspense } from "react";
 import DisabledSearchInput from "@/components/ui/disabled-search-input";
+import { cn } from "@/lib/utils";
 
 function Header() {
 	return (
@@ -16,7 +17,15 @@ function Header() {
 				<Suspense fallback={<DisabledSearchInput />}>
 					<SearchInput />
 				</Suspense>
-				<Button className="hidden md:block">Sell now</Button>
+				<Link
+					href="/add"
+					className={cn(
+						buttonVariants({ variant: "default" }),
+						"hidden md:block",
+					)}
+				>
+					Sell now
+				</Link>
 				<UserZone />
 			</div>
 		</header>

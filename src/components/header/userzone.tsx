@@ -64,7 +64,9 @@ const DesktopUser = () => {
 			<DropdownMenuContent className="w-48">
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>Create a listing</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<Link href="/add">Create a listing</Link>
+				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
 					<Link href="/my-profile">My profile</Link>
