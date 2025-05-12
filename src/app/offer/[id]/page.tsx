@@ -25,6 +25,9 @@ export default async function OfferPage({
 				},
 			},
 		},
+		cacheStrategy: {
+			ttl: 600, // 5 minutes
+		},
 	});
 
 	if (!offer) {
