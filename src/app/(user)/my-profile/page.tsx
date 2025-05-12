@@ -1,6 +1,7 @@
 import { getSession } from "@/lib/auth-server";
 import { redirect } from "next/navigation";
 import UserOffers from "@/components/user-offers";
+import { Suspense } from "react";
 
 async function ProfilePage() {
 	const session = await getSession();
@@ -22,7 +23,9 @@ async function ProfilePage() {
 				<div className="space-y-6">
 					<div>
 						<h2 className="text-2xl font-semibold mb-4">My Offers</h2>
-						<UserOffers />
+						<Suspense fallback={<div>Loading...</div>}>
+							<UserOffers />
+						</Suspense>
 					</div>
 				</div>
 			</div>
