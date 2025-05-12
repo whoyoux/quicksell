@@ -27,7 +27,7 @@ async function UserOffers() {
 	if (myOffers.length === 0) {
 		return (
 			<div className="rounded-lg border p-4 text-center text-muted-foreground">
-				You haven't added any offers yet.
+				You haven&apos;t added any offers yet.
 			</div>
 		);
 	}
