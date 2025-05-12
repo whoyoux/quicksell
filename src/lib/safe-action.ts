@@ -7,6 +7,7 @@ export const authActionClient = actionClient.use(async ({ next }) => {
 	const session = await getSession();
 
 	if (!session) {
+		console.log("Unauthorized");
 		throw new Error("Unauthorized");
 	}
 

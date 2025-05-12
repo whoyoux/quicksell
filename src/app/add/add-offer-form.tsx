@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 import { addOfferSchema } from "@/schemas/offer-schemas";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUploader } from "@/components/image-uploader";
+import { createOffer } from "@/actions/offer-actions";
 
 function AddOfferForm({ className }: { className?: string }) {
 	const [isPending, setIsPending] = useState(false);
@@ -43,12 +44,59 @@ function AddOfferForm({ className }: { className?: string }) {
 	async function onSubmit(values: z.infer<typeof addOfferSchema>) {
 		try {
 			setIsPending(true);
-			console.log("Form values:", values);
-			toast.success("Offer added successfully");
-			// router.push("/");
+
+			// Walidacja obrazów
+			if (!values.images[0]) {
+				form.setError("images", {
+					type: "manual",
+					message: "Please add at least one image",
+				});
+				toast.error("Please add at least one image");
+				return;
+			}
+
+			// Przygotowanie FormData
+			const formData = new FormData();
+			formData.append("title", values.title);
+			formData.append("description", values.description);
+			formData.append("price", values.price.toString());
+
+			// Dodawanie obrazów do FormData
+			values.images.forEach((image, index) => {
+				if (image) {
+					formData.append(
+						[
+							"firstImage",
+							"secondImage",
+							"thirdImage",
+							"fourthImage",
+							"fifthImage",
+						][index],
+						image.file,
+					);
+				}
+			});
+
+			// Wysyłanie oferty
+			const result = await createOffer(formData);
+
+			if (!result) {
+				toast.error("Wystąpił błąd podczas dodawania oferty");
+				return;
+			}
+
+			// Sprawdzamy, czy wynik zawiera błąd
+			if ("error" in result && typeof result.error === "string") {
+				toast.error(result.error);
+				return;
+			}
+
+			// Jeśli nie ma błędu, to znaczy że oferta została dodana pomyślnie
+			toast.success("Offer has been added successfully");
+			router.push("/");
 		} catch (error) {
-			console.error("Error submitting form:", error);
-			toast.error("An error occurred while adding the offer");
+			console.error("Error adding offer:", error);
+			toast.error("An unexpected error occurred while adding the offer");
 		} finally {
 			setIsPending(false);
 		}

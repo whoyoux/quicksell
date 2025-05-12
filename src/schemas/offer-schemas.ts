@@ -27,14 +27,9 @@ export const addOfferFormDataSchema = zfd.formData({
 			.min(1, "Price is required, min 1")
 			.max(1000000, "Price is too high, max 1000000"),
 	),
-	images: zfd.repeatable(
-		z
-			.array(
-				z.object({
-					url: zfd.text(z.string().url("Please enter a valid image url")),
-					file: zfd.file(z.instanceof(File)),
-				}),
-			)
-			.min(1, "Please add at least one image"),
-	),
+	firstImage: zfd.file(),
+	secondImage: zfd.file().optional().nullable(),
+	thirdImage: zfd.file().optional().nullable(),
+	fourthImage: zfd.file().optional().nullable(),
+	fifthImage: zfd.file().optional().nullable(),
 });
