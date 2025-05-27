@@ -1,13 +1,13 @@
+import UserOffers from "@/components/user-offers";
 import { getSession } from "@/lib/auth-server";
 import { redirect } from "next/navigation";
-import UserOffers from "@/components/user-offers";
 import { Suspense } from "react";
 
-async function ProfilePage() {
+export default async function ProfilePage() {
 	const session = await getSession();
 
-	if (!session) {
-		return redirect("/sign-in");
+	if (!session?.user) {
+		redirect("/sign-in");
 	}
 
 	return (
@@ -32,5 +32,3 @@ async function ProfilePage() {
 		</div>
 	);
 }
-
-export default ProfilePage;

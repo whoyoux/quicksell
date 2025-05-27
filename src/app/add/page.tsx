@@ -1,12 +1,24 @@
-import { getSession } from "@/lib/auth-server";
-import { redirect } from "next/navigation";
-import AddOfferForm from "./add-offer-form";
+"use client";
 
-async function AddPage() {
-	const session = await getSession();
+import { useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import AddOfferForm from "./add-offer-form";
+import { Spinner } from "@/components/ui/spinner";
+
+export default function AddPage() {
+	const { data: session, isPending } = useSession();
+	const router = useRouter();
+
+	if (isPending) {
+		return (
+			<div className="flex items-center justify-center min-h-[50vh]">
+				<Spinner className="h-12 w-12" />
+			</div>
+		);
+	}
 
 	if (!session?.user) {
-		return redirect("/sign-in");
+		router.push("/sign-in");
 	}
 
 	return (
@@ -18,5 +30,3 @@ async function AddPage() {
 		</div>
 	);
 }
-
-export default AddPage;

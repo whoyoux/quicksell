@@ -66,5 +66,4 @@ async function UserOffers() {
 		</div>
 	);
 }
-
 export default UserOffers;

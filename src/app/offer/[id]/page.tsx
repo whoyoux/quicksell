@@ -7,9 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CalendarDays, Mail, MapPin, Phone } from "lucide-react";
 
-export default async function OfferPage({
-	params,
-}: { params: Promise<{ id: string }> }) {
+type OfferPageParams = { params: Promise<{ id: string }> };
+
+export default async function OfferPage({ params }: OfferPageParams) {
 	"use cache";
 
 	const { id } = await params;
@@ -34,6 +34,8 @@ export default async function OfferPage({
 		notFound();
 	}
 
+	console.log(offer);
+
 	return (
 		<div className="container py-6">
 			<div className="grid gap-6 lg:grid-cols-3">
@@ -42,7 +44,7 @@ export default async function OfferPage({
 					{/* Galeria zdjęć */}
 					<div className="grid gap-4">
 						{offer.images[0] && (
-							<div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+							<div className="relative aspect-[4/3] w-full overflow-hidden bg-card rounded-lg">
 								<Image
 									src={offer.images[0]}
 									alt={offer.title}
@@ -50,6 +52,7 @@ export default async function OfferPage({
 									className="object-cover"
 									priority
 									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+									quality={100}
 								/>
 							</div>
 						)}
@@ -58,7 +61,7 @@ export default async function OfferPage({
 								{offer.images.slice(1).map((image, index) => (
 									<div
 										key={image}
-										className="relative aspect-square overflow-hidden rounded-lg"
+										className="relative aspect-square overflow-hidden rounded-lg bg-card"
 									>
 										<Image
 											src={image}
@@ -66,6 +69,7 @@ export default async function OfferPage({
 											fill
 											className="object-cover"
 											sizes="(max-width: 768px) 25vw, 15vw"
+											quality={50}
 										/>
 									</div>
 								))}
@@ -99,14 +103,14 @@ export default async function OfferPage({
 								<Avatar className="h-12 w-12">
 									<AvatarImage src={offer.user.image || undefined} />
 									<AvatarFallback>
-										{offer.user.name
+										{offer.user.email
 											.split(" ")
 											.map((n) => n[0])
 											.join("")}
 									</AvatarFallback>
 								</Avatar>
 								<div>
-									<p className="font-medium">{offer.user.name}</p>
+									<p className="font-medium truncate">{offer.user.email}</p>
 									<p className="text-sm text-muted-foreground">
 										Member since{" "}
 										{new Date(offer.createdAt).toLocaleDateString("pl-PL", {

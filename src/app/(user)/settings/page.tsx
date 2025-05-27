@@ -1,5 +1,7 @@
 "use client";
 
+import { useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
 	Card,
@@ -17,8 +19,24 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 
-function SettingsPage() {
+export default function SettingsPage() {
+	const { data: session, isPending } = useSession();
+	const router = useRouter();
+
+	if (isPending) {
+		return (
+			<div className="flex items-center justify-center min-h-[50vh]">
+				<Spinner className="h-12 w-12" />
+			</div>
+		);
+	}
+
+	if (!session?.user) {
+		router.push("/sign-in");
+	}
+
 	return (
 		<div className="container max-w-2xl py-6">
 			<h1 className="text-3xl font-bold mb-6">Settings</h1>
@@ -139,5 +157,3 @@ function SettingsPage() {
 		</div>
 	);
 }
-
-export default SettingsPage;
