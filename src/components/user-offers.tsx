@@ -22,9 +22,9 @@ async function UserOffers() {
 		orderBy: {
 			createdAt: "desc",
 		},
-		cacheStrategy: {
-			ttl: 600, // 5 minutes
-		},
+		// cacheStrategy: {
+		// 	ttl: 600, // 5 minutes
+		// },
 	});
 
 	if (myOffers.length === 0) {
